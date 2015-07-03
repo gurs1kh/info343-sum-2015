@@ -7,3 +7,16 @@
 */
 
 //use jQuery to register a function that is called when the document is ready for manipulation
+$(function() {
+   $('.form-signin').submit(function(e) {
+       e.preventDefault();
+       var username = $('#inputEmail'').val();
+       var password = $('#inputPassword'').val();
+       Parse.User.logIn(username, password).then(function() {
+           clearError();
+           window.location = "index.html";
+       }, function(err) {
+           showError(err);
+       });
+   });
+});
