@@ -65,10 +65,15 @@ $(function() {
         task.set('title', newInput.val());
         task.set('user', currentUser);
         task.set('done', false);
+
+        var button = taskForm.find(':submit');
+        button.prop('disabled', true).addClass('working');
+
         task.save().then(function() {
             clearError();
             tasks.add(task);
             newInput.val("");
+            button.prop('disabled', false).removeClass('working');
         }, function(err) {
             showError(err);
         });
